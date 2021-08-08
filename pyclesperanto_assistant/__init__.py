@@ -1,3 +1,5 @@
+__version__ = "0.1.0"
+
 def _get_docs(function_name):
     if callable(function_name):
         return function_name.__doc__
