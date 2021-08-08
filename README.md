@@ -1,8 +1,8 @@
 # pyclesperanto assistant
 
-[![License](https://img.shields.io/pypi/l/pyclesperanto_assistant.svg?color=green)](https://github.com/clesperanto/pyclesperanto_assistant/raw/master/LICENSE)
-[![PyPI](https://img.shields.io/pypi/v/pyclesperanto_assistant.svg?color=green)](https://pypi.org/project/pyclesperanto_assistant)
-[![Python Version](https://img.shields.io/pypi/pyversions/pyclesperanto_assistant.svg?color=green)](https://python.org)
+[![License](https://img.shields.io/pypi/l/pyclesperanto-assistant.svg?color=green)](https://github.com/clesperanto/pyclesperanto_assistant/raw/main/LICENSE)
+[![PyPI](https://img.shields.io/pypi/v/pyclesperanto-assistant.svg?color=green)](https://pypi.org/project/pyclesperanto_assistant)
+[![Python Version](https://img.shields.io/pypi/pyversions/pyclesperanto-assistant.svg?color=green)](https://python.org)
 [![tests](https://github.com/clesperanto/pyclesperanto_assistant/workflows/tests/badge.svg)](https://github.com/clesperanto/pyclesperanto_assistant/actions)
 [![codecov](https://codecov.io/gh/clesperanto/pyclesperanto_assistant/branch/master/graph/badge.svg)](https://codecov.io/gh/clesperanto/pyclesperanto_assistant)
 
