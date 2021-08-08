@@ -20,6 +20,7 @@ from pyclesperanto_assistant.ipython import *
 ```
 
 Afterwards, when executing `what_next()` in a cell, the cell will be replaced by suggestions derived from the [CLIJ online documentation](https://clij.github.io/clij2-docs/reference).
+For making good suggestions, it analyses the code in the notebook cell above.
 
 ## Installation
 
