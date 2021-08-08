@@ -1,4 +1,4 @@
-# napari-brightness-contrast
+# pyclesperanto assistant
 
 [![License](https://img.shields.io/pypi/l/pyclesperanto_assistant.svg?color=green)](https://github.com/clesperanto/pyclesperanto_assistant/raw/master/LICENSE)
 [![PyPI](https://img.shields.io/pypi/v/pyclesperanto_assistant.svg?color=green)](https://pypi.org/project/pyclesperanto_assistant)
