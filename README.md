@@ -8,9 +8,8 @@
 
 Assisted [pyclesperanto](https://github.com/clEsperanto/pyclesperanto_prototype) scripting in [jupyter](https://jupyter.org/) notebooks.
 
-![](https://github.com/clesperanto/pyclesperanto_assistant/blob/main/docs/images/pylesperanto_assistant_ipython.gif?raw=true)
-
-If the user interface feels slow, consider installing  to speed it up.
+![](https://github.com/clesperanto/pyclesperanto_assistant/blob/main/docs/images/pylesperanto_assistant_ipython2.gif?raw=true)
+[Download full movie](https://github.com/clesperanto/pyclesperanto_assistant/blob/main/docs/images/pylesperanto_assistant_ipython.mp4)
 
 ----------------------------------
 
