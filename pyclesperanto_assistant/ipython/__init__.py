@@ -18,10 +18,35 @@ def what_next():
     }
     """)
 
-def next_suggestions(function_name):
-    import pyclesperanto_prototype as cle
+def how_to(search_string):
+    from pyclesperanto_assistant import example_code as pa_example_code
+    from pyclesperanto_assistant import find_functions
+    from pyclesperanto_assistant import find_functions_in_categories
 
+    function_names = find_functions(search_string)
+    function_names_in_categories = find_functions_in_categories(search_string)
+
+    code = ""
+    if len(function_names_in_categories) > 0:
+        code = code + "# Operations found by category:"
+        for suggestion in function_names_in_categories:
+            code = code + "\\n" + pa_example_code(suggestion)
+    if len(function_names) > 0:
+        code = code + "# Operations found by name:"
+        for suggestion in function_names:
+            code = code + "\\n" + pa_example_code(suggestion)
+
+    if len(code) > 0:
+        code = code + "\\ncle.imshow(image)"
+        return _replace_code_in_current_cell(code)
+    else:
+        code = "how_to('" + search_string + "')\\n" + \
+            "# no results found when searching for '" + search_string + "'"
+        return _replace_code_in_current_cell(code)
+
+def next_suggestions(function_name):
     from pyclesperanto_assistant import next_suggestions as pa_next_suggestions
+    from pyclesperanto_assistant import example_code as pa_example_code
     from pyclesperanto_assistant import _online_help
     suggestions = pa_next_suggestions(function_name)
 
@@ -29,22 +54,25 @@ def next_suggestions(function_name):
         url = _online_help(function_name)
         if url is None:
             url = "https://github.com/clesperanto/pyclesperanto_prototype"
-        return Javascript(
-            "var index = IPython.notebook.get_selected_index();IPython.notebook.get_cell(index - 1).set_text('Assistant: I have no good suggestions here. Check out the [documentation](" + url + ").');IPython.notebook.get_cell(index).set_text('');IPython.notebook.cells_to_markdown([index - 1]);IPython.notebook.execute_cells([index - 1]);")
+        _replace_current_cell_with_markdown("Assistant: I have no good suggestions here. Check out the [documentation](" + url + ").")
 
-    code = ""
+    code = "# After " + function_name + " often follow these operations (choose one):"
 
     for suggestion in suggestions:
-        # example = example_code(suggestion)
-        # if example is not None:
-        #    print(example)
-        #    continue
-
-        func = getattr(cle, suggestion)
-        if len(code) > 0:
-            code = code + "\\n"
-        code = code + "image = cle." + func.__name__ + "(" + (", ".join(func.fullargspec.args)) + ")"
+        code = code + "\\n" + pa_example_code(suggestion)
     code = code + "\\ncle.imshow(image)"
 
+    return _replace_code_in_current_cell(code)
+
+
+def _replace_current_cell_with_markdown(markdown):
+    return Javascript(
+        "var index = IPython.notebook.get_selected_index();IPython.notebook.get_cell(index - 1).set_text('" + markdown + "');IPython.notebook.get_cell(index).set_text('');IPython.notebook.cells_to_markdown([index - 1]);IPython.notebook.execute_cells([index - 1]);")
+
+def _replace_code_in_current_cell(code):
     return Javascript(
         "var index = IPython.notebook.get_selected_index();IPython.notebook.get_cell(index - 1).set_text('" + code + "');IPython.notebook.get_cell(index).set_text('')")
+
+def _add_code_cell_below(code):
+    return Javascript(
+        "IPython.notebook.insert_cell_above().set_text('" + code + "');")

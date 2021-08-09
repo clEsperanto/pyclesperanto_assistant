@@ -39,6 +39,16 @@ def _clij_name_to_clesperanto_name(clij_name):
     else:
         return None
 
+def find_functions(search_string):
+    import re
+    import pyclesperanto_prototype as cle
+    name = re.sub(r'(?<!^)(?=[A-Z])', '_', search_string).lower()
+    candidates = [k for k in cle.operations().keys() if name in k]
+    return candidates
+
+def find_functions_in_categories(search_string):
+    import pyclesperanto_prototype as cle
+    return list(cle.operations(search_string).keys())
 
 def next_suggestions(function_name):
     import urllib
@@ -66,3 +76,8 @@ def next_suggestions(function_name):
             if candidate is not None:
                 candidates.append(candidate)
     return candidates
+
+def example_code(function_name):
+    import pyclesperanto_prototype as cle
+    func = getattr(cle, function_name)
+    return "image = cle." + func.__name__ + "(" + (", ".join(func.fullargspec.args)) + ")"
