@@ -81,3 +81,37 @@ def _replace_code_in_current_cell(code):
 def _add_code_cell_below(code):
     return Javascript(
         "IPython.notebook.insert_cell_above().set_text('" + code + "');")
+
+def explain(function_name):
+    from pyclesperanto_assistant import _online_help
+
+    import urllib
+    url = _online_help(function_name)
+    file = urllib.request.urlopen(url)
+
+    search_mode = False
+
+    output = ""
+
+    for line in file:
+        decoded_line = line.decode("utf-8")
+        if "<section>" in decoded_line:
+            search_mode = True
+            continue
+        if search_mode:
+            if "</section>" in decoded_line:
+                break
+            output = output + "\n" + decoded_line\
+                .replace("\"reference_", "\"https://clij.github.io/clij2-docs/reference_") \
+                .replace("<img src=\"images/mini_empty_logo.png\" />", "")\
+                .replace("<img src=\"images/mini_clij1_logo.png\" />", "")\
+                .replace("<img src=\"images/mini_clij2_logo.png\" />", "")\
+                .replace("<img src=\"images/mini_clijx_logo.png\" />", "")\
+                .replace("<img src=\"images/mini_cle_logo.png\" />", "")\
+                .replace("src=\"images", "src=\"https://clij.github.io/clij2-docs/images")\
+                .replace("href=", "target=\"_blank\" href=")\
+                .replace("<p></p>", "")
+
+
+    from IPython.core.display import HTML
+    return HTML(output)
