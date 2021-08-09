@@ -43,6 +43,7 @@ def find_functions(search_string):
     import re
     import pyclesperanto_prototype as cle
     name = re.sub(r'(?<!^)(?=[A-Z])', '_', search_string).lower()
+
     candidates = [k for k in cle.operations().keys() if name in k]
     return candidates
 
@@ -80,4 +81,9 @@ def next_suggestions(function_name):
 def example_code(function_name):
     import pyclesperanto_prototype as cle
     func = getattr(cle, function_name)
-    return "image = cle." + func.__name__ + "(" + (", ".join(func.fullargspec.args)) + ")"
+    if hasattr(func, "fullargspec"):
+        args = func.fullargspec.args
+    else:
+        import inspect
+        args = inspect.getfullargspec(func).args
+    return "image = cle." + func.__name__ + "(" + (", ".join(args)) + ")"

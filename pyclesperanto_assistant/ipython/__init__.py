@@ -17,6 +17,7 @@ def what_next():
         cell.set_text("# the oracle has no idea")
     }
     """)
+whatnext = what_next
 
 def how_to(search_string):
     from pyclesperanto_assistant import example_code as pa_example_code
@@ -32,6 +33,8 @@ def how_to(search_string):
         for suggestion in function_names_in_categories:
             code = code + "\\n" + pa_example_code(suggestion)
     if len(function_names) > 0:
+        if len(code) > 0:
+            code = code + "\\n"
         code = code + "# Operations found by name:"
         for suggestion in function_names:
             code = code + "\\n" + pa_example_code(suggestion)
@@ -43,6 +46,8 @@ def how_to(search_string):
         code = "how_to('" + search_string + "')\\n" + \
             "# no results found when searching for '" + search_string + "'"
         return _replace_code_in_current_cell(code)
+# alias
+howto = how_to
 
 def next_suggestions(function_name):
     from pyclesperanto_assistant import next_suggestions as pa_next_suggestions
